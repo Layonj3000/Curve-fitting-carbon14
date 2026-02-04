@@ -46,7 +46,7 @@ Isso transforma o problema em uma reta $Y = A + Bx$, permitindo a resolução vi
 ### Passo a Passo
 1.  Clone este repositório:
     ```bash
-    git clone https://github.com/Layonj3000/curve-fitting-carbon14.git
+    git clone https://github.com/Layonj3000/Curve-fitting-carbon14.git
     ```
 2.  Acesse a pasta do projeto:
     ```bash
