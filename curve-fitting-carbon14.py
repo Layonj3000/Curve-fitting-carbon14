@@ -4,20 +4,25 @@ import math
 t_values = []
 N_values = []
 
-with open('carbono14.txt', 'r') as arquivo:
-    for linha in arquivo:
-        parts = linha.split()
-        if len(parts) >= 2:
-            try:
-                t = float(parts[-2])
-                N = float(parts[-1])
-                t_values.append(t)
-                N_values.append(N)
-            except ValueError:
-                continue
+try:
+    with open('carbono14.txt', 'r') as arquivo:
+        for linha in arquivo:
+            parts = linha.split()
+            if len(parts) >= 2:
+                try:
+                    t = float(parts[-2])
+                    N = float(parts[-1])
+                    t_values.append(t)
+                    N_values.append(N)
+                except ValueError:
+                    continue
 
-print(f"Dados carregados: {len(t_values)} amostras.")
+    print(f"Dados carregados: {len(t_values)} amostras.")
 
+except FileNotFoundError:
+    print("ERRO: O arquivo não foi encontrado na pasta.")
+
+# Verifica se há dados antes de prosseguir com o cálculo
 if len(t_values) > 0:
     # Linearização: Y = ln(N)
     Y_values = [math.log(n) for n in N_values]
@@ -72,3 +77,6 @@ if len(t_values) > 0:
     print(f"Para N = {N_target}:")
     print(f"Idade estimada (t) = {t_estimado:.4f} anos")
     print("-" * 30)
+
+else:
+    print("Nenhum dado foi processado. Verifique o arquivo de entrada.")
