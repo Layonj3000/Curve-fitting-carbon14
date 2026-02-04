@@ -4,7 +4,6 @@ import math
 t_values = []
 N_values = []
 
-# Vamos assumir que o arquivo existe por enquanto
 with open('carbono14.txt', 'r') as arquivo:
     for linha in arquivo:
         parts = linha.split()
@@ -53,3 +52,23 @@ if len(t_values) > 0:
         return x0, x1
 
     alpha_0, alpha_1 = solve_linear_system_2x2(A, b)
+
+    # Recuperação dos parâmetros
+    beta_0 = math.exp(alpha_0)
+    beta_1 = alpha_1
+
+    print("-" * 30)
+    print("RESULTADOS DO AJUSTE")
+    print("-" * 30)
+    print(f"Beta_0 (Coeficiente Linear): {beta_0:.4f}")
+    print(f"Beta_1 (Coeficiente Exponencial): {beta_1:.8f}")
+    print(f"Equação Final: N = {beta_0:.4e} * e^({beta_1:.6e} * t)")
+    print("-" * 30)
+
+    # Estimativa solicitada
+    N_target = 53307321157
+    t_estimado = (math.log(N_target) - math.log(beta_0)) / beta_1
+
+    print(f"Para N = {N_target}:")
+    print(f"Idade estimada (t) = {t_estimado:.4f} anos")
+    print("-" * 30)
